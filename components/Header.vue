@@ -68,6 +68,8 @@
 </template>
 
 <script>
+const Cookie = process.client ? require('js-cookie') : undefined
+
 export default {
   data() {
     return {
@@ -83,7 +85,9 @@ export default {
   },
   methods: {
     logout() {
-      console.log('Log out')
+      Cookie.remove('auth')
+      this.$store.dispatch('logout')
+      this.$router.push('/login')
     }
   }
 }
