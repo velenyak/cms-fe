@@ -70,6 +70,7 @@
 
 <script>
 import _ from 'lodash'
+const Cookie = process.client ? require('js-cookie') : undefined
 
 export default {
   data() {
@@ -86,6 +87,8 @@ export default {
           password: this.password
         })
         this.$store.dispatch('login', { user: _.get(result, 'user'), token: _.get(result, 'token') })
+        Cookie.set('auth', _.get(result, 'token'))
+        this.$router.push('/')
       } catch (e) {
         console.error('Error', e)
       }
@@ -93,10 +96,11 @@ export default {
     async googleLogin() {
       try {
         const googleUser = await this.$gAuth.signIn()
-        console.log('User', googleUser)
         const result = await this.$axios.$post(`/auth/login/google`, { accessToken: googleUser.getAuthResponse().id_token })
         this.$store.dispatch('login', { user: _.get(result, 'user'), token: _.get(result, 'token') })
-        this.error = null
+        Cookie.set('auth', _.get(result, 'token'))
+        this.$router.push('/')
+        console.log('WHY NOT NAVIGATE')
       } catch (e) {
         console.error('Error', e)
       }

@@ -88,6 +88,7 @@ export default {
   components: {
     Logo,
     VuetifyLogo
-  }
+  },
+  middleware: 'authenticated'
 }
 </script>

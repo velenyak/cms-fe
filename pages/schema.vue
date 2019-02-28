@@ -97,6 +97,7 @@ export default {
   head: {
     title: 'New Schema'
   },
+  middleware: 'authenticated',
   async asyncData({ app }) {
     // let schemaTypes = await app.$axios.get('http://localhost:3000/api/schema')
     // console.log('types', JSON.stringify(schemaTypes.data))

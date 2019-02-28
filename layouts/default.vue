@@ -1,6 +1,6 @@
 <template>
   <v-app dark>
-    <v-navigation-drawer
+    <!-- <v-navigation-drawer
       v-model="drawer"
       :mini-variant="miniVariant"
       :clipped="clipped"
@@ -55,40 +55,40 @@
       >
         <v-icon>menu</v-icon>
       </v-btn>
-    </v-toolbar>
+    </v-toolbar> -->
+    <cms-header />
     <v-content>
       <v-container>
         <nuxt />
       </v-container>
     </v-content>
-    <v-navigation-drawer
-      v-model="rightDrawer"
-      :right="right"
-      temporary
-      fixed
-    >
-      <v-list>
-        <v-list-tile @click.native="right = !right">
-          <v-list-tile-action>
-            <v-icon light>
-              compare_arrows
-            </v-icon>
-          </v-list-tile-action>
-          <v-list-tile-title>Switch drawer (click me)</v-list-tile-title>
-        </v-list-tile>
-      </v-list>
-    </v-navigation-drawer>
     <v-footer
       :fixed="fixed"
       app
     >
-      <span>&copy; 2019</span>
+      <v-layout
+        row
+        wrap
+      >
+        <v-flex
+          py-3
+          pr-5
+          text-xs-right
+          white--text
+          xs12
+        >
+          &copy; {{ new Date().getFullYear() }} — <strong>Velenyák János</strong>
+        </v-flex>
+      </v-layout>
     </v-footer>
   </v-app>
 </template>
 
 <script>
+import CmsHeader from '@/components/Header'
+
 export default {
+  components: { CmsHeader },
   data() {
     return {
       clipped: false,

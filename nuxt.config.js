@@ -42,6 +42,7 @@ module.exports = {
   */
   plugins: [
     '@/plugins/vuetify',
+    '@/plugins/axios',
     { src: '@/plugins/googleAuth', ssr: false }
   ],
 
@@ -57,7 +58,7 @@ module.exports = {
   */
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
-    baseURL: 'http://localhost:8088'
+    baseURL: 'http://localhost:8081'
   },
 
   /*
