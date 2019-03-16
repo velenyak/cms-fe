@@ -26,7 +26,8 @@
 <script>
 import _ from 'lodash'
 
-const getTypefromMeta = (metaType) => {
+const getTypefromMeta = (metaType, isRef) => {
+  if (isRef) return 'v-input-select'
   switch (metaType) {
     case 'string': return 'v-input-text'
     case 'date': return 'v-input-date'
@@ -47,6 +48,7 @@ export default {
         label: f.options ? f.options.label || f.name : f.name
       })
       )
+    fields.push({ key: 'test', type: 'v-input-select', templateOptions: { options: [] } })
     return {
       meta,
       schema,

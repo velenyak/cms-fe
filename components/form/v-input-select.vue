@@ -3,12 +3,13 @@
     <v-select
       v-model="model[field.key]"
       :label="field.label"
+      :items="to.options"
     />
   </v-flex>
 </template>
 
 <script>
-import baseField from './form/baseField'
+import baseField from './baseField'
 
 export default {
   mixins: [baseField]
