@@ -49,7 +49,7 @@
                     </v-flex>
                     <v-flex md5 class="px-2">
                       <v-select
-                        v-model="field.type"
+                        v-model="field.typeOf"
                         label="Type"
                         :items="typeOptions"
                         required
@@ -144,10 +144,16 @@ export default {
       this.schema.fields.splice(index, 1)
     },
     async submit() {
-      // console.log('Submit', this.schema)
-      const res = await this.$axios.$post('http://localhost:3000/api/schema', this.schema)
-      // console.log('Result', res)
-      this.$store.dispatch('addSchema', res)
+      try {
+        console.log('Submit', this.schema)
+        const res = await this.$axios.$post('/schema', this.schema)
+        console.log('Result', res)
+        this.$store.dispatch('addSchema', res)
+        this.$store.dispatch('addAlert', { text: 'Új séma feltöltve', color: 'success' })
+      } catch (e) {
+        console.error('Error submitting schema', e)
+        this.$store.dispatch('addAlert', { text: 'Nem sikerült a sémát feltölteni', color: 'error' })
+      }
     }
   }
 }

@@ -103,6 +103,7 @@ export default {
         console.log('WHY NOT NAVIGATE')
       } catch (e) {
         console.error('Error', e)
+        this.$store.dispatch('addAlert', { text: 'Nem sikerült a sémát feltölteni', color: 'danger' })
       }
     }
   }

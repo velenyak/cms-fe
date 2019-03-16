@@ -43,7 +43,9 @@ module.exports = {
   plugins: [
     '@/plugins/vuetify',
     '@/plugins/axios',
-    { src: '@/plugins/googleAuth', ssr: false }
+    { src: '@/plugins/googleAuth', ssr: false },
+    { src: '@/plugins/formly' },
+    { src: '@/plugins/datetime' }
   ],
 
   /*

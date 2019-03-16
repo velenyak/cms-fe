@@ -79,7 +79,7 @@ export default {
   computed: {
     menu() {
       return this.$store.state.schemas.map(schema => (
-        { icon: 'done', title: schema.name, to: `/list/${schema.name}` }
+        { icon: 'done', title: schema.name, to: `/content/${schema.name}` }
       ))
     }
   },
