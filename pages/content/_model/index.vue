@@ -1,30 +1,11 @@
 <template>
-  <v-container>
-    <form>
-      <no-ssr>
-        <formly-form :form="form" :model="model" :fields="fields" custom-layout="true">
-          <template scope="f">
-            <v-layout row>
-              <formly-field
-                v-for="(field, $index) in f.keys"
-                :key="$index"
-                :form.sync="form"
-                :model.sync="model"
-                :field="field"
-              />
-            </v-layout>
-          </template>
-        </formly-form>
-      </no-ssr>
-      <!-- <button type="submit">
-        Submit
-      </button> -->
-    </form>
-  </v-container>
+  <content-page :schema="schema" :fields="fields" />
 </template>
 
 <script>
 import _ from 'lodash'
+
+import ContentPage from '@/components/ContentPage'
 
 const getTypefromMeta = (metaType, isRef) => {
   if (isRef) return 'v-input-autocomplete'
@@ -54,15 +35,6 @@ export default {
       fields
     }
   },
-  data() {
-    return {
-      model: {
-        name: {
-          userName: 'Test'
-        }
-      },
-      form: {}
-    }
-  }
+  components: { ContentPage }
 }
 </script>
