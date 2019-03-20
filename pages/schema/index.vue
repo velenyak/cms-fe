@@ -118,7 +118,7 @@ export default {
       methodsOptions: [
         { text: 'Create', value: 'post' },
         { text: 'Delete', value: 'delete' },
-        { text: 'Modify', value: 'put' },
+        { text: 'Modify', value: 'patch' },
         { text: 'Read', value: 'get', disabled: true }
       ]
     }
@@ -128,7 +128,8 @@ export default {
       const defaultOptions = [
         { text: 'Text', value: 'String' },
         { text: 'Number', value: 'Number' },
-        { text: 'Date', value: 'Date' }
+        { text: 'Date', value: 'Date' },
+        { text: 'Checkbox', value: 'Boolean' }
       ]
       const schemaOptions = this.$store.state.schemas.map(schema => ({ text: schema.name, value: schema.name }))
       return _.union(defaultOptions, schemaOptions)
