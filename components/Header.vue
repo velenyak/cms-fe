@@ -4,24 +4,25 @@
       v-model="drawer"
       fixed
       app
+      clipped
     >
       <v-list dense>
         <v-list-tile to="/">
-          <v-list-tile-action>
+          <v-list-tile-action @click="$router.push('/')">
             <v-icon>home</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
             <v-list-tile-title>Home</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
-        <v-list-tile @click="$router.push('/login')">
+        <!-- <v-list-tile @click="$router.push('/login')">
           <v-list-tile-action>
             <v-icon>person</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
             <v-list-tile-title>Login</v-list-tile-title>
           </v-list-tile-content>
-        </v-list-tile>
+        </v-list-tile> -->
         <v-list-tile to="/schema">
           <v-list-tile-action>
             <v-icon>add_circle_outline</v-icon>
@@ -40,7 +41,7 @@
         </v-list-tile>
       </v-list>
     </v-navigation-drawer>
-    <v-toolbar dark fixed app>
+    <v-toolbar dark fixed app clipped-left>
       <v-toolbar-side-icon @click.stop="drawer = !drawer" />
       <v-toolbar-title>CMS</v-toolbar-title>
       <v-spacer />

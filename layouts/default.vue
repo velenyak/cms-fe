@@ -1,6 +1,6 @@
 <template>
   <v-app dark>
-    <cms-header />
+    <cms-header v-if="$route.name !== 'login'" />
     <v-content>
       <v-container>
         <nuxt />
