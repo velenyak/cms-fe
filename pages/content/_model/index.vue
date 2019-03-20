@@ -1,5 +1,5 @@
 <template>
-  <content-page :schema="schema" :fields="fields" />
+  <content-page :schema="schema" :meta="meta" :fields="fields" />
 </template>
 
 <script>

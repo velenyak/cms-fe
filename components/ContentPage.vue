@@ -34,6 +34,10 @@ export default {
       type: Object,
       required: true
     },
+    meta: {
+      type: Object,
+      required: true
+    },
     fields: {
       type: Array,
       required: true
@@ -47,7 +51,6 @@ export default {
     return {
       loading: false,
       model: {
-        userName: 'Test'
       },
       form: {}
     }
