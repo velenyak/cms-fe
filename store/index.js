@@ -32,12 +32,6 @@ export const mutations = {
 
 export const actions = {
   async nuxtServerInit({ commit }, { app, req, redirect }) {
-    try {
-      const schemas = await app.$axios.$get('/schema')
-      commit('SET_SCHEMAS', schemas)
-    } catch (e) {
-      commit('SET_SCHEMAS', [])
-    }
     if (req.headers.cookie) {
       const parsed = cookieparser.parse(req.headers.cookie)
       try {
@@ -53,6 +47,12 @@ export const actions = {
         // No valid cookie found
         console.error('Error Authenticating user from cookie token', err)
       }
+    }
+    try {
+      const schemas = await app.$axios.$get('/schema')
+      commit('SET_SCHEMAS', schemas)
+    } catch (e) {
+      commit('SET_SCHEMAS', [])
     }
   },
   addSchema({ commit, state }, newSchema) {
