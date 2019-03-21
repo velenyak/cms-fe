@@ -48,12 +48,10 @@ export default {
     // Get with everything populated
     const populateFields = _.filter(schemaMeta.meta.fields.map(f => f.ownRef ? ({ path: f.name, model: _.upperFirst(f.typeOf) }) : null))
     const query = {}
-    console.log('POPULATE', populateFields)
     query.populate = JSON.stringify(populateFields)
     const schemaData = await app.$axios.$get(`/api/v1/${params.model}`, { params: query })
     return {
       schemaData,
-      // schemaData2,
       schemaMeta
     }
   },
