@@ -26,7 +26,7 @@ export default {
       .map(f => ({
         key: f.name,
         type: getTypefromMeta(f.typeOf),
-        label: f.options ? f.options.label || f.name : f.name
+        label: _.get(f, 'options.label', f.name)
       })
       )
     return {

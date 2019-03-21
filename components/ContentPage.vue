@@ -50,8 +50,7 @@ export default {
   data() {
     return {
       loading: false,
-      model: {
-      },
+      model: {},
       form: {}
     }
   },

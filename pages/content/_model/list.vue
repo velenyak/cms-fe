@@ -18,7 +18,10 @@
               v-for="(key, $index) in headers"
               :key="$index"
             >
-              {{ props.item[key.value] }}
+              <v-icon v-if="key.field.typeOf === 'boolean'">
+                {{ formatItem(props.item, key) }}
+              </v-icon>
+              <span v-else v-html="formatItem(props.item, key)" />
             </td>
           </template>
         </v-data-table>
@@ -36,6 +39,7 @@
 </template>
 
 <script>
+import moment from 'moment'
 import _ from 'lodash'
 
 export default {
@@ -57,7 +61,18 @@ export default {
   },
   computed: {
     headers() {
-      return _.map(this.schemaMeta.meta.fields, f => ({ text: f.name, value: f.name }))
+      return _.map(this.schemaMeta.meta.fields, f => ({ text: _.get(f, 'options.label', f.name), value: f.name, field: f }))
+    }
+  },
+  methods: {
+    formatItem(item, header) {
+      const type = header.field.typeOf
+      switch (_.lowerCase(type)) {
+        case 'string': return _.get(item, header.value)
+        case 'date': return moment(_.get(item, header.value)).format('L')
+        case 'boolean': return _.get(item, header.value) ? 'done' : 'clear'
+        case 'number': return _.get(item, header.value)
+      }
     }
   }
 }
