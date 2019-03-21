@@ -3,7 +3,7 @@
     <v-select
       v-model="model[field.key]"
       :label="field.label"
-      :items="to.options"
+      :items="options || []"
     />
   </v-flex>
 </template>
@@ -12,6 +12,17 @@
 import baseField from './baseField'
 
 export default {
-  mixins: [baseField]
+  mixins: [baseField],
+  data() {
+    return {
+      options: []
+    }
+  },
+  async mounted() {
+    if (this.to.field.ownRef) {
+      const options = await this.$axios.$get(`/api/v1/${this.to.field.typeOf}`)
+      this.options = options.map(o => ({ value: o._id, text: o.name }))
+    }
+  }
 }
 </script>

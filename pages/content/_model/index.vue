@@ -14,7 +14,7 @@ const getTypefromMeta = (metaType, isRef) => {
     case 'date': return 'v-input-date'
     case 'number': return 'v-input-number'
     case 'boolean': return 'v-input-checkbox'
-    default: return 'v-input-text'
+    default: return 'v-input-select'
   }
 }
 
@@ -26,7 +26,8 @@ export default {
       .map(f => ({
         key: f.name,
         type: getTypefromMeta(f.typeOf),
-        label: _.get(f, 'options.label', f.name)
+        label: _.get(f, 'options.label', f.name),
+        templateOptions: { field: f }
       })
       )
     return {

@@ -45,14 +45,12 @@ import _ from 'lodash'
 export default {
   async asyncData({ app, params }) {
     const schemaMeta = await app.$axios.$get(`/schema/${params.model}`)
-    const schemaData = await app.$axios.$get(`/api/v1/${params.model}`)
-    // const query = {}
-    // const populate = schemaMeta.fields.map((field) => {
-    //   if (field.ownRef) return { path: field.name, model: field.type }
-    // }).filter(_.identity)
-    // query.populate = populate
-    // console.log(JSON.stringify(query))
-    // const schemaData2 = await app.$axios.$get(`/api/v1/${params.model}`, { params: query })
+    // Get with everything populated
+    const populateFields = _.filter(schemaMeta.meta.fields.map(f => f.ownRef ? ({ path: f.name, model: _.upperFirst(f.typeOf) }) : null))
+    const query = {}
+    console.log('POPULATE', populateFields)
+    query.populate = JSON.stringify(populateFields)
+    const schemaData = await app.$axios.$get(`/api/v1/${params.model}`, { params: query })
     return {
       schemaData,
       // schemaData2,
@@ -72,6 +70,7 @@ export default {
         case 'date': return moment(_.get(item, header.value)).format('L')
         case 'boolean': return _.get(item, header.value) ? 'done' : 'clear'
         case 'number': return _.get(item, header.value)
+        default: return _.get(item, `${header.value}.name`)
       }
     }
   }
